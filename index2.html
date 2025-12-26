@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'Kanit';
+            src: url('./Kanit/Kanit-BoldItalic.ttf') format('truetype');
+        }
+        body {
+            background-color: rgb(187, 241, 255);
+        }
+        #re {
+            color: rgb(114, 80, 80);
+            text-align: center;
+        }
+        .input_name{
+            background-color: antiquewhite;
+            border: 2px  solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="re"> Register</h1>
+    ชื่อ :<input class="input_name" type="text" id="fname" name="fname">
+    นามสกุล :<input type="text" id="fname" name="lname"><br>
+    gender :
+    <input type="radio" name="gender" value="male">male
+    <input type="radio" name="gender" value="female">female<br>
+    อายุ : <input type="number" name="age" min="0" max="120"><br>
+    งานอดิเรก : 
+    <input type="checkbox" name="hobby" value="foot">ฟุตบอล
+    <input type="checkbox" name="hobby" value="bas">บาส
+    <input type="checkbox" name="hobby" value="reading">อ่านหนังสือ
+    <br>
+    รายละเอียด :<br>
+    <textarea name="details" rows="5" cols="30"></textarea> 
+    <input type="submit" value="Sumit">
+    
+
+
+</body>
+</html>
