@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--ชื่อ <input 
+    id="fname"
+    class="input"
+    type="text"
+    name="fname"
+    value="Test">
+    นามสกุล <input 
+    id="lname"
+    class="input"
+    type="text"
+    name="lname"
+    value="User">
+    tel <input 
+    id="tel"
+    class="input"
+    type="text"
+    name="tel"
+    value="0123456789">
+    hobby <input type="checkbox" name="fname" value="football" >football
+    <input type="checkbox" name="fname" value="basketball" >basketball
+    <input type="checkbox" name="fname" value="badminton" >badminton
+
+    <button onclick="userClick()">Click me</button>
+    <div onclick="divclick()">Div clicked</div>
+-->
+
+    <input type="radio" name="gender" value="male" onchange="changeGender()">Male
+    <input type="radio" name="gender" value="female" onchange="changeGender()">Female
+
+    <script>
+        /*
+        let input = document.getElementsByClassName("input");
+        console.log(input);
+        for (let i = 0; i < input.length; i++) {
+            console.log(input[i].value);
+            }
+        let inputs = document.querySelector('input[name="fname"]');
+        console.log(input.value);
+        let inputs = document.querySelectorAll('input[type="checkbox"]');
+        console.log(inputs);
+        for (let i = 0; i < inputs.length; i++) {
+            console.log(inputs[i].value);
+        }
+        function userClick() {
+            console.log("Button was clicked");
+        }
+        function divclick() {
+            console.log("Div was clicked");
+        }*/
+        function changeGender() {
+            //เลือก เพศ ทั้งหมด
+            let genders = document.querySelectorAll('input[name="gender"]');
+            //ดูว่า อันไหนถูกเลือก
+            for (let i=0;i<genders.length;i++) {
+                if(genders[i].checked) {
+                    console.log("Gender selected: " + genders[i].value);
+                }
+            }
+        }
+    </script> 
+</body>
+</html>
