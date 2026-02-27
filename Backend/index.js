@@ -62,15 +62,52 @@ app.get('/users/:id',async (req, res) => {
     res.json(results[0]);
 })
 
-//app.put('/users/:id', async (req, res) => {
-//    let id = req.params.id;
-//    let updateUser = req.body;
-//    const results = await conn.query('UPDATE users SET ?'.[updateUser,id]);
-//    res.json({
-//        message: 'user suc',
- //       data: results[0]
-  //  })
-//})
+
+//update
+app.put('/users/:id', async (req, res) => {
+    try {
+        let id = req.params.id
+        let updatedUser = req.body;
+        const results = await conn.query('UPDATE users SET ? WHERE id = ?', [updatedUser, id])
+        if (results[0].affectedRows == 0) {
+            throw { statusCode: 404, message: 'User not found' };
+        }
+        res.json({
+            message: 'User updated successfully',
+            data: updatedUser
+        });
+    }
+    catch (error) {
+        console.error('Error updating user:', error.message);
+        let statusCode = error.statusCode || 500;
+        res.status(statusCode).json({
+            message: 'Error updating user',
+            error: error.message
+        });
+    }
+})
+
+//deleted
+app.delete('/users/:id', async (req, res) => {
+    try {
+        let id = req.params.id
+        const results = await conn.query('DELETE FROM users WHERE id = ?', id)
+        if (results[0].affectedRows == 0) {
+            throw { statusCode: 404, message: 'User not found' };
+        }   
+        res.json({
+            message: 'User deleted successfully'
+        });
+    }
+    catch (error) {
+        console.error('Error deleting user:', error.message);
+        let statusCode = error.statusCode || 500;
+        res.status(statusCode).json({
+            message: 'Error deleting user',
+            error: error.message
+        });
+    }
+})
 
 //app.post('/user', (req, res) => {
  //   let user = req.body;
