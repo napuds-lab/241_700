@@ -118,3 +118,19 @@ textarea {
 .button:hover {
     background-color: #218838;
 }
+
+.message {
+    background-color: #007bff;
+    padding: 10px;
+    display: none;
+}
+
+.message.success {
+    background-color: #218838;
+    display: block;
+}
+
+.message.danger{
+    background-color: #e92020;
+    display: block;
+}
