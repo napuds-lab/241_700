@@ -63,7 +63,6 @@ app.get('/users/:id',async (req, res) => {
 })
 
 
-//update
 app.put('/users/:id', async (req, res) => {
     try {
         let id = req.params.id
@@ -87,7 +86,6 @@ app.put('/users/:id', async (req, res) => {
     }
 })
 
-//deleted
 app.delete('/users/:id', async (req, res) => {
     try {
         let id = req.params.id
@@ -163,3 +161,4 @@ app.listen(port,async ()=> {
     await initMySQL();
     console.log(`Server is running on http://localhost:${port}`);
 });
+
