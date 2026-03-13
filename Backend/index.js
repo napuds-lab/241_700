@@ -43,27 +43,65 @@ app.get('/users',async (req, res) => {
     res.json(results[0]);
 })
 
+const validateData = (userData) => {
+    let errors = [];
+    if (!userData.firstName) {
+        errors.push('First name is required');
+    }
+    if (!userData.lastName) {
+        errors.push('Last name is required');
+    }
+    if (!userData.age) {
+        errors.push('Age is required');
+    }
+    if (!userData.gender) {
+        errors.push('Gender is required');
+    }
+    if (!userData.description) {
+        errors.push('Description is required');
+    }
+    if (!userData.interests) {
+        errors.push('Interests are required');
+    }
+    return errors;
+}
+
 //post
 app.post('/users',async (req, res) => {
-        let user = req.body;
+    try{let user = req.body;
+        const errors = validateData(user);
+        if (errors.length > 0){
+            throw {
+                message: 'กรุณากรอกให้ครบ',
+                errors: errors
+            }
+        }
         const results = await conn.query('INSERT INTO users SET ?', user);
         console.log('results',results);
         res.json({
             message: 'user',
             data: results[0]
         });
+    }catch(error) {
+        console.log('ejhae')
+        const errormessage = error.message || 'Error creating user';
+        const statusCode = error.statusCode || [];
+        res.status(statusCode).json({
+            message: errormessage,
+            errors: errors
+        });
+    }
 })
 
 app.get('/users/:id',async (req, res) => {
     try{
-
-    }catch{
+        const results = await conn.query('SELECT * FROM users WHERE id = ?', [id]);
+    res.json(results[0]);
+    }catch(error){
         console.error('Error',error);
         letsta
     }
-    let id = req.params.id;
-    const results = await conn.query('SELECT * FROM users WHERE id = ?', [id]);
-    res.json(results[0]);
+    let id = req.params.id;  
 })
 
 app.put('/users/:id', async (req, res) => {
@@ -111,28 +149,6 @@ app.delete('/users/:id', async (req, res) => {
     }
 })
 
-//app.put('/users/:id', async (req, res) => {
-//    let id = req.params.id;
-//    let updateUser = req.body;
-//    const results = await conn.query('UPDATE users SET ?'.[updateUser,id]);
-//    res.json({
-//        message: 'user suc',
- //       data: results[0]
-  //  })
-//})
-
-//app.post('/user', (req, res) => {
- //   let user = req.body;
- //   user.id=counter
- //   counter+=1;
-
- //   users.push(user);
- //   res.json({
- //   message: 'User added successful',
-//    user: user
-//    });
-//});
-
 app.patch('/user/:id', (req,res)=>{
     let id = req.params.id;
     let updateUser = req.body;
@@ -159,10 +175,10 @@ app.patch('/user/:id', (req,res)=>{
         }
     });
 });
-    //ส่ง users ที่อัพเดตแล้วกลับไป
+    
 app.delete('/users/:id',(req, res) => {
     let id = req.params.id;
-    //หา index จาก id ที่ต้องการลบ
+    //หา index id ที่ต้องการลบ
     let selectedIndex = users.findIndex(user => user.id == id);
     users.splice(selectedIndex, 1);
     //ลบ user ออกจาก users
