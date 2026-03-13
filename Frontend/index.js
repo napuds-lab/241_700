@@ -56,7 +56,7 @@ const submitData = async () => {
                 errors: errors
             }
         }
-
+    
         const response = await axios.post('http://localhost:8000/users', userData);
         console.log('response', response)
         messageDOM.innerText = "บันทึกข้อมูลสำเร็จ";
@@ -64,11 +64,13 @@ const submitData = async () => {
     } catch (error) {
         console.error('Error submitting data:', error.message);
         console.error('Error details:', error.errors);
-        /*
+        
         if (error.response) {
-            console.log('error response', error.response.data.massage);
+            console.log('error response', error.response);
+            error.message = error.response.data.message;
+            error.errors = error.response.data.errors;
         }
-        */
+        
         let htmlData = '<div>';
         htmlData += '<div>' + error.message + '</div>';
         htmlData += '<ul>';
